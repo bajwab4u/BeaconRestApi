@@ -6,6 +6,8 @@ const logger = require('morgan');
 const authRoutes = require('./routes/authRoutes');
 const requireAuth = require('./middleware/authMiddleware');
 const profileRouter = require('./routes/profileRoutes');
+const teacherRouter = require('./routes/teacherRoutes');
+const studentRouter = require('./routes/studentRoutes');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
@@ -20,7 +22,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'));
-
 
 // view engine
 app.set('view engine', 'ejs');
@@ -42,8 +43,10 @@ mongoose.connect('mongodb://localhost:27017/Beacon', {
 
 
 //routes
-app.use('/profile',requireAuth,profileRouter);
 app.use(authRoutes);
+app.use('/profile',requireAuth,profileRouter);
+app.use('/teacher',teacherRouter);
+
 
 
 // catch 404 and forward to error handler
