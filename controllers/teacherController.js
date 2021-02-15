@@ -10,6 +10,8 @@ const handleErrors = (err) => {
       errors.id = 'This Joining ID Already Exists';
       return errors;
     }
+    
+
     // validation errors
     if (err.message.includes('User validation failed')) {
         Object.values(err.errors).forEach(({properties}) => {

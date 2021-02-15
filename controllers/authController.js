@@ -9,22 +9,22 @@ const handleErrors = (err) => {
     
     // incorrect email
     if (err.message === 'incorrect email') {
-      errors.email = 'Email not registered';
+        errors.email = 'Email not registered';
     }
   
     // incorrect password
     if (err.message === 'incorrect password') {
-      errors.password = 'Incorrect Password';
+        errors.password = 'Incorrect Password';
     }
   
     // duplicate email error
     if (err.code === 11000) {
-      errors.email = 'That email is already registered';
-      return errors;
+       errors.email = 'That email is already registered';
+       return errors;
     }
     // validation errors
     if (err.message.includes('User validation failed')) {
-        Object.values(err.errors).forEach(({properties}) => {
+          Object.values(err.errors).forEach(({properties}) => {
           errors[properties.path] = properties.message;
         });
         
