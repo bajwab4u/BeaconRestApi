@@ -29,6 +29,7 @@ app.set('view engine', 'ejs');
 
 // Connect MongoDB at default port 27017.
 mongoose.connect('mongodb://localhost:27017/Beacon', {
+    useFindAndModify: false,
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -41,11 +42,11 @@ mongoose.connect('mongodb://localhost:27017/Beacon', {
 });
 
 
-
 //routes
 app.use(authRoutes);
 app.use('/profile',requireAuth,profileRouter);
 app.use('/teacher',teacherRouter);
+app.use('/student',studentRouter);
 
 
 
