@@ -3,11 +3,14 @@ const Schema = mongoose.Schema;
 
 
 const classSchema = new Schema({
+    teacher: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    },
     name:{
         type:String,
         required: [true, 'Please enter a name']
     },
-    
     description:{
         type:String,
         minlength: [20, 'Desciption Length should be atleast 20 Characters'],
@@ -15,10 +18,18 @@ const classSchema = new Schema({
     },
     id:{
         type:String,
-        required: [true, 'Please enter a id'],
+        required: [true, 'Please enter id'],
         minlength: [6, 'ID length is 6 characters'],
         unique: true
     },
+    students: {
+        type: [{
+            sid: {
+                type: mongoose.Types.ObjectId,
+                ref: 'User'
+            }
+        }]
+    }
     
 
 });

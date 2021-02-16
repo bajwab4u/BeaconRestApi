@@ -1,4 +1,5 @@
 const Class = require('../models/class');
+const User = require('../models/user');
 
 // handle errors
 const handleErrors = (err) => {
@@ -27,6 +28,8 @@ const handleErrors = (err) => {
 
 
 module.exports.createClass_post = async  (req,res) =>{
+  let user = await User.findOne({email:req.body.email});
+  req.body["teacher"]=(user._id);
    try{
     const classinfo = await Class.create(req.body);
     res.status(201);
