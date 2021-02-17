@@ -42,7 +42,13 @@ module.exports.createClass_post = async  (req,res) =>{
    }   
 };
 
-module.exports.classInfo_get = (req,res) =>{
-    res.render('signup');
-    res.send('Class Info is Provided');
+module.exports.classDetails_get = async (req,res) =>{
+  let user = await User.findOne({email:req.params.email}); 
+  Class.find({teacher:user._id}).populate('teacher').populate('students.sid').exec(function(error, results) {
+    if (error) {
+        return next(error);
+    }
+    // Respond with valid data
+    res.json(results);
+  });
 };

@@ -16,4 +16,8 @@ module.exports.joinClass_put = async (req,res) =>{
     });
 
   };
+
+  module.exports.classDetails_get = async (req,res) =>{
+    
+  };
   

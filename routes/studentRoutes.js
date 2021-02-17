@@ -4,5 +4,6 @@ const studentController = require('../controllers/studentController');
 
 
 router.put('/class', studentController.joinClass_put);
+router.get('/classDetails', studentController.classDetails_get);
 
 module.exports = router;
