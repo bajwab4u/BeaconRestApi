@@ -18,6 +18,13 @@ module.exports.joinClass_put = async (req,res) =>{
   };
 
   module.exports.classDetails_get = async (req,res) =>{
-    
+    let user = await User.findOne({email:req.params.email}); 
+    Class.find({"students.sid":user._id}).populate('teacher').populate('students.sid').exec(function(error, results) {
+      if (error) {
+          return next(error);
+      }
+      // Respond with valid data
+      res.json(results);
+    });
   };
   
