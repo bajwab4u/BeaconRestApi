@@ -63,6 +63,20 @@ module.exports.login_post = async (req,res) =>{
   }
 }
 
+module.exports.changePassword_put = async (req,res) =>{
+  const { email, password } = req.body;
+  try {
+    const user = await User.login(email, password);
+    console.log(user);
+   
+  } 
+  catch (err) {
+    const errors = handleErrors(err);
+    res.status(400);
+    res.json(errors);
+  }
+}
+
 module.exports.signup_post = async  (req,res) =>{
    try{
     const user = await User.create(req.body);

@@ -9,7 +9,8 @@ const classSchema = new Schema({
     },
     name:{
         type:String,
-        required: [true, 'Please enter a name']
+        required: [true, 'Please enter a name'],
+        unique: true
     },
     description:{
         type:String,
@@ -30,24 +31,28 @@ const classSchema = new Schema({
             }
         }]
         
+    },
+    assignment:{
+        type: [{
+            sid: {
+                type: mongoose.Types.ObjectId,
+                ref: 'Assignment'
+            }
+        }]
+    },
+    quiz:{
+        type: [{
+            sid: {
+                type: mongoose.Types.ObjectId,
+                ref: 'Quiz'
+            }
+        }]
+ 
     }
     
 
 });
   
-  // static method to joining class
-//   userSchema.statics.login = async function(email, password) {
-//     const user = await this.findOne({ email });
-//     if (user) {
-//       const auth = await bcrypt.compare(password, user.password);
-//       if (auth) {
-//         return user;
-//       }
-//       throw Error('incorrect password');
-//     }
-//     throw Error('incorrect email');
-//   };
-
 
 const Class = mongoose.model('Class',classSchema);
 
